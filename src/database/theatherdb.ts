@@ -20,4 +20,5 @@ export async function getTheaters() {
     await client.close();
   }
 }
+
 // getMovies().catch(console.dir);

@@ -8,11 +8,13 @@ export async function getUsers() {
 
   try {
     await client.connect();
-    const dbName = "sample_mflix";
-    const dbCollection = "users";
-    const database = client.db(dbName);
-    const collection = database.collection(dbCollection);
-    const users = await collection.find().limit(10).toArray();
+    const database = client.db("school");
+    const collection = database.collection("students");
+    const users = await collection
+      .find({
+        $and: [{ gpa: { $gte: 3 } }, { gpa: { $lte: 4 } }],
+      })
+      .toArray();
     return users;
   } catch (e) {
     console.log(e);

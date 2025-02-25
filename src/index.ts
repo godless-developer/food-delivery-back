@@ -2,9 +2,12 @@ import express from "express";
 import bodyParser from "body-parser";
 import { getMovies } from "./database/mongodb";
 import { getTheaters } from "./database/theatherdb";
-import { getUsers } from "./database/usersdb";
+import { getUsers } from "./database/school/studentsDb";
+import { createUser } from "./database/school/createStudent";
+import { configDotenv } from "dotenv";
 const app = express();
-const port = 4000;
+configDotenv();
+const port = process.env.PORT;
 
 app.use(bodyParser.json());
 
@@ -33,13 +36,24 @@ app.get("/theaters", async (req, res) => {
   }
 });
 
-app.get("/users", async (req, res) => {
+app.get("/students", async (req, res) => {
   try {
     const users = await getUsers();
     res.status(200).json({ message: "success", users: users });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "error", error });
+  }
+});
+
+app.post("/students", async (req, res) => {
+  const { studentsData } = req.body;
+  console.log(studentsData);
+  try {
+    const users = await createUser(studentsData);
+    res.status(201).json({ message: "added success" });
+  } catch (error) {
+    res.status(500).json({ messsage: "Error", error });
   }
 });
 
