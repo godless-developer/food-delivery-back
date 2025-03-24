@@ -5,6 +5,7 @@ import { connectMongoDb } from "./database/db";
 import cors from "cors";
 import categoriesRouter from "./routes/categories.route";
 import foodsInfoRoute from "./routes/foodsInfo.route";
+import userRoute from "./routes/auth.route";
 const app = express();
 configDotenv();
 connectMongoDb();
@@ -14,6 +15,7 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use("/categories", categoriesRouter);
 app.use("/foodsInfo", foodsInfoRoute);
+app.use("/auth", userRoute);
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);

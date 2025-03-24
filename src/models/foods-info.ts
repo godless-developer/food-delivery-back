@@ -5,6 +5,7 @@ type FoodInfoSchemaType = {
   foodDescription: string;
   foodPrice: string;
   category: Schema.Types.ObjectId;
+  foodImg: string;
 };
 
 const FoodsInfoSchema: Schema = new Schema(
@@ -17,6 +18,7 @@ const FoodsInfoSchema: Schema = new Schema(
       ref: "FoodCategory",
       required: true,
     },
+    foodImg: String,
   },
   {
     timestamps: true,
