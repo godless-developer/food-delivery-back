@@ -3,10 +3,10 @@ import mongoose, { Schema } from "mongoose";
 type UserSchemaType = {
   email: string;
   password: string;
-  phoneNumber: string;
-  address: string;
-  role: "USER" | "ADMIN";
-  orderedFoods: string[];
+  phoneNumber?: string;
+  address?: string;
+  role?: "USER" | "ADMIN";
+  orderedFoods?: string[];
 };
 
 const UserSchema: Schema = new Schema(
